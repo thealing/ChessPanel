@@ -8,6 +8,7 @@ using ChessPanel.Engines;
 using ChessPanel.Scenes;
 using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Windows.Forms;
