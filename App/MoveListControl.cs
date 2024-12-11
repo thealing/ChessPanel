@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using static ChessPanel.Core.Pieces;
 using static ChessPanel.Core.Game;
 using static ChessPanel.App.GraphicsHelper;
+using ChessPanel.App.Prefs;
 
 internal class MoveListControl : ScrollableContainer
 {
@@ -167,7 +168,7 @@ internal class MoveListControl : ScrollableContainer
 		double time = Time.GetTime();
 		if (_autoPlay)
 		{
-			if (_autoPlayTime + 0.5 < time)
+			if (_autoPlayTime + Play.AutoPlayInterval / 1000.0 < time)
 			{
 				_autoPlayTime = time;
 				GameManager.StepForward(1);
