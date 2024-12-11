@@ -3,6 +3,7 @@
 using ChessPanel.Core;
 using System;
 using static ChessPanel.Core.Pieces;
+using static ChessPanel.Core.Move;
 using static ChessPanel.Core.Game;
 using System.Linq;
 using System.Collections.Generic;
@@ -99,7 +100,7 @@ internal static class GameManager
 		{
 			return;
 		}
-		if (IsPiece(move.TargetPiece))
+		if (IsPiece(move.TargetPiece) || move.Type == EnPassantMove)
 		{
 			SoundManager.StopAllSounds();
 			SoundManager.EnqueueSound(Sounds.Capture);
