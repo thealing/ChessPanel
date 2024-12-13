@@ -9,6 +9,7 @@ using static ChessPanel.Core.Pieces;
 using static ChessPanel.Core.Game;
 using static ChessPanel.App.GraphicsHelper;
 using ChessPanel.App.Prefs;
+using System.CodeDom;
 
 internal class MoveListControl : ScrollableContainer
 {
@@ -45,6 +46,7 @@ internal class MoveListControl : ScrollableContainer
 		UpdateMenu();
 		UpdateMouse();
 		UpdateKeyboard();
+		UpdateTooltip();
 		base.Update();
 	}
 
@@ -223,6 +225,17 @@ internal class MoveListControl : ScrollableContainer
 			_menuAction();
 			_menuAction = null;
 			_menuNode = null;
+		}
+	}
+
+	private void UpdateTooltip()
+	{
+		if (_hoveredNode?.Comment is string comment)
+		{
+			ToolTipManager.SetToolTip(comment);
+		}
+		else
+		{
 		}
 	}
 

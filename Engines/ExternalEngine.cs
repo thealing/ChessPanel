@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using ChessPanel.App;
+using ChessPanel.Core;
 using static ChessPanel.Core.Game;
 using static ChessPanel.Core.Scores;
 
@@ -383,7 +384,7 @@ public sealed class ExternalEngine : AbstractEngine
 						if (mateMatch.Success)
 						{
 							int mateDistance = int.Parse(mateMatch.Groups[1].Value);
-							_bestScores[depth] = Math.Sign(mateDistance) * MateScore - mateDistance;
+							_bestScores[depth] = Scores.ToMateScore(mateDistance);
 						}
 					}
 				}
