@@ -1,6 +1,7 @@
 ﻿namespace ChessPanel.App.Prefs;
 
 using System;
+using ChessPanel.Scenes;
 
 internal static class Play
 {
@@ -44,6 +45,10 @@ internal static class Play
 		SaveManager.Save += () => SaveManager.Sync(nameof(AutoPlayInterval), ref AutoPlayInterval);
 		SaveManager.Save += () => SaveManager.Sync(nameof(MoveAnimation), ref MoveAnimation);
 		SaveManager.Save += () => SaveManager.Sync(nameof(MoveMethod), ref MoveMethod);
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Play), nameof(AutoQueen));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Play), nameof(AutoPlayInterval));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Play), nameof(MoveAnimation));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Play), nameof(MoveMethod));
 	}
 
 	private static readonly string[] _moveAnimations = new string[] { "None", "Very fast", "Fast", "Medium", "Slow" };

@@ -5,9 +5,16 @@ public sealed class SceneWindow : Form
 {
 	public SceneWindow()
 	{
-		SetStyle(ControlStyles.UserPaint, true);
-		SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-		SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(Location));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(Size));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(ClientSize));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(BackColor));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(ForeColor));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(Font));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(Text));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(BackgroundImage));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(WindowState));
+		InvalidationManager.RegisterInvalidatingProperty(this, nameof(Opacity));
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)

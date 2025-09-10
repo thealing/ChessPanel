@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using ChessPanel.Core;
+using ChessPanel.Scenes;
 using static ChessPanel.Core.Pieces;
 
 internal class TreeGame : UciGame
@@ -261,15 +262,7 @@ internal class TreeGame : UciGame
 		_root = root;
 		_node = root;
 		_result = base.GetResult();
-	}
-
-	private TreeGame(string fen, TreeNode root)
-	{
-		base.SetFen(fen);
-		_fen = fen;
-		_root = root;
-		_node = root;
-		_result = base.GetResult();
+		RegisterInvalidatingFields();
 	}
 
 	private TreeGame(string fen, TreeNode root, Result result)
@@ -279,6 +272,15 @@ internal class TreeGame : UciGame
 		_root = root;
 		_node = root;
 		_result = result;
+		RegisterInvalidatingFields();
+	}
+
+	private void RegisterInvalidatingFields()
+	{
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_root));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_node));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_result));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_fen));
 	}
 
 	private string _fen;

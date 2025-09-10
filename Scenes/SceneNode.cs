@@ -51,6 +51,10 @@ public class SceneNode
 		_size = new Size(0, 0);
 		_children = new List<SceneNode>();
 		_parent = null;
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_location));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_size));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_children));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_parent));
 	}
 
 	public virtual void Enter()
@@ -84,6 +88,17 @@ public class SceneNode
 			{
 				SceneProfiler.UpdateDurations[child.Parent] -= updateDuration;
 			}
+		}
+		if (InputManager.IsLeftButtonPressed())
+		{
+			if (!ContainsMouse())
+			{
+				_clickedOutside = true;
+			}
+		}
+		if (!InputManager.IsLeftButtonDown())
+		{
+			_clickedOutside = false;
 		}
 	}
 
@@ -139,7 +154,7 @@ public class SceneNode
 
 	public virtual bool ContainsMouse()
 	{
-		return SelfBounds.Contains(GetMousePosition());
+		return !_clickedOutside && SelfBounds.Contains(GetMousePosition());
 	}
 
 	public T? FindChildByType<T>() where T : SceneNode
@@ -211,4 +226,5 @@ public class SceneNode
 	private Size _size;
 	private List<SceneNode> _children;
 	private SceneNode? _parent;
+	private bool _clickedOutside;
 }

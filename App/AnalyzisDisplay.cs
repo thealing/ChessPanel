@@ -24,6 +24,7 @@ internal class AnalyzisDisplay : Container
 		_evals = new List<int>();
 		_classCounts = new int[ColorCount, MoveClassCount];
 		_lineHeight = _font.Height * 6 / 5;
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_hoveredIndex));
 	}
 
 	protected override void UpdatePosition()

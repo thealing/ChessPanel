@@ -139,6 +139,7 @@ internal static class MatchManager
 				}
 				if (updateTime)
 				{
+					double previousTime = _times[turn];
 					_times[turn] += _countingUp[turn] ? deltaTime : -deltaTime;
 				}
 			}
@@ -532,7 +533,15 @@ internal static class MatchManager
 				}
 			}
 		};
-
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_lastPlayerMatch));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_lastEngineMatch));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_loadedMatches));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_playing));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_paused));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_finished));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_wasFinished));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_boardDisabled));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(MatchManager), nameof(_lastRank));
 	}
 
 	private static readonly double[] _increments = new double[2];

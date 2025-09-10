@@ -17,6 +17,7 @@ internal static class DialogHelper
 	{
 		SoundManager.StopAllSounds();
 		form.ShowDialog();
+		InvalidationManager.ForceInvalidate();
 	}
 
 	public static void ShowCancellableDialog(Form form)

@@ -1,5 +1,4 @@
 ﻿namespace ChessPanel.Engines;
-
 public sealed class CheckOption : UciOption
 {
 	public readonly bool Value;

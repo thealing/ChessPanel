@@ -3,6 +3,7 @@
 using System;
 using ChessPanel.App.Prefs;
 using ChessPanel.Core;
+using ChessPanel.Scenes;
 using static ChessPanel.Core.Game;
 using static ChessPanel.Core.Move;
 using static ChessPanel.Core.Pieces;
@@ -197,6 +198,10 @@ internal static class GameManager
 				_game.MoveUndone += OnMoveChanged;
 			}
 		};
+		if (_dirty)
+		{
+			InvalidationManager.ForceInvalidate();
+		}
 	}
 
 	private static void OnMoveChanged(object? sender, Move move)

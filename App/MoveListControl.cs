@@ -34,6 +34,18 @@ internal class MoveListControl : ScrollableContainer
 		_moveClassBrushes[Mistake] = new SolidBrush(MixColors(0.8, Color.Orange, Color.Black));
 		_moveClassBrushes[Blunder] = new SolidBrush(MixColors(0.8, Color.Red, Color.Black));
 		_rowHeight = _font.Height * 3 / 2;
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_moveWidth));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_numberWidth));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_rowHeight));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_padding));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_hoveredNode));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_menuNode));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_menuAction));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_currentRectangle));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_previousRectangle));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_buttons));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_autoPlay));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_autoPlayTime));
 	}
 
 	public override void Enter()
@@ -252,9 +264,6 @@ internal class MoveListControl : ScrollableContainer
 		{
 			ToolTipManager.SetToolTip(comment);
 		}
-		else
-		{
-		}
 	}
 
 	private void RenderNode(Graphics g, TreeNode node, Rectangle rectangle)
@@ -262,10 +271,6 @@ internal class MoveListControl : ScrollableContainer
 		if (node == GameManager.GetGame().GetCurrentNode())
 		{
 			_currentRectangle = rectangle;
-		}
-		if (!g.ClipBounds.IntersectsWith(rectangle))
-		{
-			return;
 		}
 		Point mousePosition = GetMousePosition() + new Size(0, ScrollHeight);
 		if (ContainsMouse() && rectangle.Contains(mousePosition))

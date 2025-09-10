@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using ChessPanel.App.Prefs;
 using ChessPanel.Core;
+using ChessPanel.Scenes;
 using static ChessPanel.Core.Game;
 using static ChessPanel.Core.Pieces;
 
@@ -555,6 +556,21 @@ internal static class PgnManager
 		_entries = new List<string>() { "Event", "Site", "Date", "Round", "White", "Black", "Result" };
 		_values = new Dictionary<string, string>();
 		_dirty = false;
+		InvalidationManager.RegisterInvalidatingStaticProperty(typeof(PgnManager), nameof(ValuesHash));
+	}
+
+	private static int ValuesHash
+	{
+		get
+		{
+			HashCode hash = new HashCode();
+			foreach (KeyValuePair<string, string> pair in _values)
+			{
+				hash.Add(pair.Key);
+				hash.Add(pair.Value);
+			}
+			return hash.ToHashCode();
+		}
 	}
 
 	private static readonly string[] _colorNames;

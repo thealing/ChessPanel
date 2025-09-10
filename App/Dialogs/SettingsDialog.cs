@@ -26,6 +26,7 @@ internal class SettingsDialog : BaseDialog
 		AddValue(page, nameof(General.PlaySounds));
 		AddValue(page, nameof(General.ConfirmExit));
 		AddValue(page, nameof(General.AutoSaveInterval), "Auto-save interval (ms)");
+		AddValue(page, nameof(General.EnableIdleMode));
 		page = AddTab(typeof(Themes));
 		AddValue(page, nameof(Themes.Pieces));
 		AddValue(page, nameof(Themes.Board));

@@ -1,5 +1,7 @@
 ﻿namespace ChessPanel.App.Prefs;
 
+using ChessPanel.Scenes;
+
 internal static class Board
 {
 	public static bool Flipped = false;
@@ -17,5 +19,11 @@ internal static class Board
 		SaveManager.Save += () => SaveManager.Sync(nameof(HighlightSelection), ref HighlightSelection);
 		SaveManager.Save += () => SaveManager.Sync(nameof(HighlightMoves), ref HighlightMoves);
 		SaveManager.Save += () => SaveManager.Sync(nameof(HighlightCheck), ref HighlightCheck);
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Board), nameof(Flipped));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Board), nameof(ShowCoordinates));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Board), nameof(ShowLegalMoves));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Board), nameof(HighlightSelection));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Board), nameof(HighlightMoves));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Board), nameof(HighlightCheck));
 	}
 }

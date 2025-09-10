@@ -9,7 +9,7 @@ public class ClipChanger : IDisposable
 	{
 		_graphics = graphics;
 		_oldClip = _graphics.Clip;
-		_graphics.SetClip(clip);
+		_graphics.IntersectClip(clip);
 	}
 
 	public void Dispose()

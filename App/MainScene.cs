@@ -64,6 +64,10 @@ internal class MainScene : Scene
 		MatchManager.Update();
 		SaveManager.Update();
 		GameMenu.Update();
+		if (!General.EnableIdleMode)
+		{
+			InvalidationManager.ForceInvalidate();
+		}
 		base.Update();
 	}
 

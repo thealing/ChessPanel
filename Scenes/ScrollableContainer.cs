@@ -12,6 +12,19 @@ public class ScrollableContainer : Container
 
 	protected bool Dragging => _dragAnchor != null;
 
+	public ScrollableContainer()
+	{
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_hasScrollbar));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_scrollRectangle));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_scrollbarRectangle));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_dragAnchor));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_lastScrollHeight));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(ScrollbarWidth));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(VirtualHeight));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(ScrollHeight));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(ScrollUnit));
+	}
+
 	public override void Update()
 	{
 		if (ScrollHeight != _lastScrollHeight)

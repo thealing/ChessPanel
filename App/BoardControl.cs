@@ -27,6 +27,13 @@ internal class BoardControl : SceneNode
 		_boardSize = 0;
 		_selectedSquare = NoSquare;
 		_hoveredSquare = NoSquare;
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_gapSize));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_squareSize));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_boardSize));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_selectedSquare));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_activeSquare));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_dragging));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_draggedLocation));
 	}
 
 	public override void Update()
@@ -87,7 +94,10 @@ internal class BoardControl : SceneNode
 		{
 			_hoveredSquare = square;
 		}
-		_draggedLocation = InputManager.GetMousePosition();
+		if (_dragging)
+		{
+			_draggedLocation = InputManager.GetMousePosition();
+		}
 		if (MatchManager.IsBoardDisabled() || GameManager.IsDirty())
 		{
 			_selectedSquare = NoSquare;
@@ -249,6 +259,7 @@ internal class BoardControl : SceneNode
 			}
 			if (AnimationManager.IsAnimating() && AnimationManager.AnimatedMove != null)
 			{
+				InvalidationManager.ForceInvalidate();
 				Move move = AnimationManager.AnimatedMove.Value;
 				double progress = AnimationManager.GetAnimationProgress();
 				void DrawPiece(int piece, PointF point)
@@ -325,6 +336,7 @@ internal class BoardControl : SceneNode
 		{
 			return;
 		}
+		_activeSquare = NoSquare;
 		int squareUnderMouse = GetSquareUnderMouse();
 		ReadOnlySpan<Move> legalMoves = GameManager.GetLegalMoves();
 		bool[] visited = new bool[SquareCount];
@@ -333,6 +345,10 @@ internal class BoardControl : SceneNode
 			if (move.SourceSquare != _selectedSquare)
 			{
 				continue;
+			}
+			if (move.TargetSquare == squareUnderMouse)
+			{
+				_activeSquare = squareUnderMouse;
 			}
 			int square = move.TargetSquare;
 			if (visited[square])
@@ -477,6 +493,7 @@ internal class BoardControl : SceneNode
 	private int _boardSize;
 	private int _selectedSquare;
 	private int _hoveredSquare;
+	private int _activeSquare;
 	private bool _dragging;
 	private Point _draggedLocation;
 }

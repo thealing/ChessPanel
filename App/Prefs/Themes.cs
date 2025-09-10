@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using ChessPanel.Resources;
+using ChessPanel.Scenes;
 
 internal static class Themes
 {
@@ -20,6 +21,8 @@ internal static class Themes
 			Pieces = Tuple.Create(Pieces.Item1, _pieceThemes);
 			Board = Tuple.Create(Board.Item1, _boardThemes);
 		};
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Themes), nameof(Pieces));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(Themes), nameof(Board));
 	}
 
 	private static readonly string[] _pieceThemes = ResourceManager.EnumerateSubfolders("Pieces").ToArray();

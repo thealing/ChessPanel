@@ -109,8 +109,7 @@ public static class SceneManager
 			{
 				if (!_window.IsDisposed && !IsMinimized())
 				{
-					InvalidateRect(_window.Handle, IntPtr.Zero, false);
-					UpdateWindow(_window.Handle);
+					_window.Refresh();
 				}
 				renderTime = time;
 			}
@@ -179,7 +178,6 @@ public static class SceneManager
 	private static void RenderScene(Graphics g)
 	{
 		_scene?.Render(g);
-		_renderCount++;
 	}
 
 	private static void BeforeRender(Graphics g)
@@ -211,6 +209,10 @@ public static class SceneManager
 		_updateCount = 0;
 		_renderCount = 0;
 		_measureTime += elapsed;
+		if (_showFps)
+		{
+			InvalidationManager.ForceInvalidate();
+		}
 	}
 
 	private static int GetUpdateFps()
@@ -225,14 +227,30 @@ public static class SceneManager
 
 	private static void OnPaint(PaintEventArgs e)
 	{
-		Graphics g = e.Graphics;
+		Graphics g = _graphics.Graphics;
+		InvalidationManager.Update();
+		if (InvalidationManager.IsInvalidated())
+		{
+			g.ResetClip();
+		}
+		else
+		{
+			g.SetClip(Rectangle.Empty);
+		}
 		BeforeRender(g);
 		RenderScene(g);
 		AfterRender(g);
+		if (InvalidationManager.IsInvalidated())
+		{
+			_graphics.Render();
+			_renderCount++;
+		}
 	}
 
 	private static void OnResize()
 	{
+		_context = BufferedGraphicsManager.Current;
+		_graphics = _context.Allocate(_window.CreateGraphics(), _window.ClientRectangle);
 		_scene?.Resize(new Rectangle(Point.Empty, _window.ClientSize));
 	}
 
@@ -244,6 +262,8 @@ public static class SceneManager
 	static SceneManager()
 	{
 		_window = new SceneWindow();
+		_context = BufferedGraphicsManager.Current;
+		_graphics = _context.Allocate(_window.CreateGraphics(), _window.ClientRectangle);
 		_toolTip = new ToolTip();
 		_disposed = false;
 		_scene = null;
@@ -253,9 +273,13 @@ public static class SceneManager
 		_updateFps = 0;
 		_renderFps = 0;
 		_showFps = false;
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(SceneManager), nameof(_scene));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(SceneManager), nameof(_showFps));
 	}
 
 	private static SceneWindow _window;
+	private static BufferedGraphicsContext _context;
+	private static BufferedGraphics _graphics;
 	private static ToolTip _toolTip;
 	private static MenuStrip? _menu;
 	private static bool _disposed;
@@ -272,10 +296,4 @@ public static class SceneManager
 
 	[DllImport("winmm.dll", EntryPoint = "timeEndPeriod")]
 	private static extern uint TimeEndPeriod(uint period);
-
-	[DllImport("user32.dll")]
-	private static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
-
-	[DllImport("user32.dll")]
-	private static extern bool UpdateWindow(IntPtr hWnd);
 }

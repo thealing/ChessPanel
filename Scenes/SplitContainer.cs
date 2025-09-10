@@ -57,6 +57,11 @@ public class SplitContainer : Container
 		_secondChild = new SceneNode();
 		AddChild(_firstChild);
 		AddChild(_secondChild);
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_split));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_actualSplit));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_dragging));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_firstChild));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_secondChild));
 	}
 
 	public override void Update()

@@ -20,6 +20,10 @@ internal class PlayerDisplay : Container
 		_activeBrush = new SolidBrush(Color.LightGreen);
 		_flaggedBrush = new SolidBrush(Color.IndianRed);
 		_fontHeight = _clockFont.Height;
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_whiteSeconds));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_whiteTenths));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_blackSeconds));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_blackTenths));
 	}
 
 	public override void Render(Graphics g)
@@ -98,12 +102,12 @@ internal class PlayerDisplay : Container
 		g.DrawRectangle(Pens.Black, blackRectangle);
 		whiteTime = Math.Max(whiteTime, 0);
 		blackTime = Math.Max(blackTime, 0);
-		int whiteSeconds = whiteTime / 1000;
-		int blackSeconds = blackTime / 1000;
-		int whiteTenths = whiteTime / 100 % 10;
-		int blackTenths = blackTime / 100 % 10;
-		string whiteText = $"{whiteSeconds / 60,2}:{whiteSeconds % 60:D2}.{whiteTenths}";
-		string blackText = $"{blackSeconds / 60,2}:{blackSeconds % 60:D2}.{blackTenths}";
+		_whiteSeconds = whiteTime / 1000;
+		_blackSeconds = blackTime / 1000;
+		_whiteTenths = whiteTime / 100 % 10;
+		_blackTenths = blackTime / 100 % 10;
+		string whiteText = $"{_whiteSeconds / 60,2}:{_whiteSeconds % 60:D2}.{_whiteTenths}";
+		string blackText = $"{_blackSeconds / 60,2}:{_blackSeconds % 60:D2}.{_blackTenths}";
 		whiteRectangle.Inflate(-padding, -padding);
 		blackRectangle.Inflate(-padding, -padding);
 		g.DrawString(whiteText, _clockFont, _foregroundBrush, whiteRectangle, StringFormats.Centered);
@@ -134,4 +138,8 @@ internal class PlayerDisplay : Container
 	private readonly Brush _activeBrush;
 	private readonly Brush _flaggedBrush;
 	private readonly int _fontHeight;
+	private int _whiteSeconds;
+	private int _blackSeconds;
+	private int _whiteTenths;
+	private int _blackTenths;
 }

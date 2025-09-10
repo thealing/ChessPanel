@@ -29,6 +29,13 @@ public static class ToolTipManager
 		_changed = false;
 	}
 
+	static ToolTipManager()
+	{
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(ToolTipManager), nameof(_toolTipText));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(ToolTipManager), nameof(_active));
+		InvalidationManager.RegisterInvalidatingStaticField(typeof(ToolTipManager), nameof(_changed));
+	}
+
 	private static string? _toolTipText;
 	private static bool _active;
 	private static bool _changed;

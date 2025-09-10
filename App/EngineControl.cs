@@ -38,6 +38,16 @@ internal class EngineControl : Container
 		_columnsDirty = true;
 		_analyzing = false;
 		_rowHeight = _font.Height * 5 / 4;
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_engine));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_reachedDepth));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_evalColor));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_nonEmptyRowCount));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_columnsTotalWidth));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_hoveredRow));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_moveNumber));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_currentNode));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_engineFailed));
+		InvalidationManager.RegisterInvalidatingField(this, nameof(_analyzing));
 	}
 
 	public void SetEngine(IEngine engine)
