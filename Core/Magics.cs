@@ -1,8 +1,8 @@
 ﻿namespace Scabine.Core;
 
-using static Squares;
 using static Bitboards;
 using static Bitmasks;
+using static Squares;
 
 public static class Magics
 {

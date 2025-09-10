@@ -1,10 +1,9 @@
 ﻿namespace Scabine.Scenes;
 
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
-using System;
 
 internal static class CenteredMessageBox
 {

@@ -1,16 +1,13 @@
 ﻿namespace Scabine.App.Dialogs;
 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 using Scabine.App;
 using Scabine.App.Prefs;
 using Scabine.Scenes;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using static Scabine.Core.Pieces;
 using static Scabine.App.Dialogs.DialogCreator;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static Scabine.Core.Pieces;
 
 internal class PlayEngineDialog : BaseDialog
 {

@@ -1,18 +1,11 @@
 ﻿namespace Scabine.App;
 
+using System.Drawing;
+using System.Windows.Forms;
 using Scabine.App.Dialogs;
 using Scabine.App.Menus;
 using Scabine.App.Prefs;
-using Scabine.Core;
-using Scabine.Engines;
 using Scabine.Scenes;
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml.Linq;
 
 internal class MainScene : Scene
 {

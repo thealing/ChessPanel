@@ -1,12 +1,9 @@
 ﻿namespace Scabine.App.Dialogs;
 
+using System.Drawing;
+using System.Windows.Forms;
 using Scabine.App.Prefs;
 using Scabine.Core;
-using Scabine.Scenes;
-using System;
-using System.Drawing;
-using System.Security.Policy;
-using System.Windows.Forms;
 using static Scabine.Core.Pieces;
 
 internal class PromotionDialog : Form

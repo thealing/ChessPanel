@@ -4,7 +4,7 @@ public sealed class CheckOption : UciOption
 {
 	public readonly bool Value;
 
-	public CheckOption(string name, bool value) 
+	public CheckOption(string name, bool value)
 		: base(name)
 	{
 		Value = value;

@@ -1,8 +1,8 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Engines;
 using System;
 using System.Collections.Generic;
+using Scabine.Engines;
 
 internal class EngineInfo : EngineParams
 {

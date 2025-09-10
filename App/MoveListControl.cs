@@ -1,15 +1,15 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Scenes;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using static Scabine.Core.Pieces;
-using static Scabine.Core.Game;
+using Scabine.App.Prefs;
+using Scabine.Scenes;
 using static Scabine.App.GraphicsHelper;
 using static Scabine.App.MoveClassifications;
-using Scabine.App.Prefs;
+using static Scabine.Core.Game;
+using static Scabine.Core.Pieces;
 
 internal class MoveListControl : ScrollableContainer
 {

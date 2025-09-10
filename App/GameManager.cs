@@ -1,14 +1,11 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Core;
 using System;
-using static Scabine.Core.Pieces;
-using static Scabine.Core.Move;
-using static Scabine.Core.Game;
-using System.Linq;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using Scabine.App.Prefs;
+using Scabine.Core;
+using static Scabine.Core.Game;
+using static Scabine.Core.Move;
+using static Scabine.Core.Pieces;
 
 internal static class GameManager
 {

@@ -157,7 +157,7 @@ internal static partial class DialogCreator
 			Text = text,
 			Bounds = new Rectangle(x, y, width, height),
 			CheckAlign = ContentAlignment.MiddleLeft,
-			TextAlign = appearance == Appearance.Button ? ContentAlignment.MiddleCenter : ContentAlignment.MiddleLeft, 
+			TextAlign = appearance == Appearance.Button ? ContentAlignment.MiddleCenter : ContentAlignment.MiddleLeft,
 			Appearance = appearance
 		};
 		if (click != null)

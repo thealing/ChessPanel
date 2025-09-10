@@ -1,12 +1,8 @@
 ﻿namespace Scabine.Scenes;
 
-using Scabine.App.Dialogs;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Timers;
 using System.Windows.Forms;
 
 public static class SceneManager

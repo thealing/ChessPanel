@@ -1,7 +1,4 @@
 ﻿namespace Scabine.App.Prefs;
-
-using System;
-
 internal static class General
 {
 	public static string Name = "Player";

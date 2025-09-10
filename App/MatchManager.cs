@@ -1,16 +1,15 @@
 ﻿namespace Scabine.App;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 using Scabine.App.Menus;
 using Scabine.App.Prefs;
 using Scabine.Core;
 using Scabine.Engines;
 using Scabine.Scenes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
 using static Scabine.Core.Pieces;
 
 internal static class MatchManager
@@ -533,7 +532,7 @@ internal static class MatchManager
 				}
 			}
 		};
-		
+
 	}
 
 	private static readonly double[] _increments = new double[2];

@@ -1,19 +1,16 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using Scabine.App.Prefs;
-using Scabine.Core;
-using Scabine.Scenes;
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using Scabine.App.Prefs;
+using Scabine.Core;
 using static Scabine.App.Dialogs.DialogCreator;
 using static Scabine.Core.Pieces;
-using static Scabine.Core.Squares;
 using static Scabine.Core.Position;
-using System.Xml.Linq;
-using System.Text;
+using static Scabine.Core.Squares;
 
 internal class PositionSetupDialog : BaseDialog
 {
@@ -218,7 +215,7 @@ internal class PositionSetupDialog : BaseDialog
 		{
 			UpdateMouse();
 		}
-		
+
 	}
 
 	private void OnMouseDown(object? sender, MouseEventArgs e)

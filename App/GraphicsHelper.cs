@@ -1,9 +1,9 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Scenes;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using Scabine.Scenes;
 
 internal class GraphicsHelper
 {

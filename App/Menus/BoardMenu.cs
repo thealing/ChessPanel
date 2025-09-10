@@ -1,9 +1,5 @@
 ﻿namespace Scabine.App.Menus;
 
-using Scabine.App;
-using Scabine.App.Dialogs;
-using Scabine.App.Prefs;
-using Scabine.Scenes;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -12,6 +8,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Forms;
+using Scabine.App;
+using Scabine.App.Dialogs;
+using Scabine.App.Prefs;
+using Scabine.Scenes;
 
 internal static class BoardMenu
 {

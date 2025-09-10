@@ -1,8 +1,6 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using System;
 using System.Drawing;
-using System.Security.Policy;
 using System.Windows.Forms;
 using static Scabine.App.Dialogs.DialogCreator;
 

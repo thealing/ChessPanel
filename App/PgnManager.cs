@@ -1,17 +1,15 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using static Scabine.Core.Pieces;
-using static Scabine.Core.Game;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using Scabine.App.Prefs;
-using System.Reflection;
-using System.Xml.Linq;
+using Scabine.Core;
+using static Scabine.Core.Game;
+using static Scabine.Core.Pieces;
 
 internal static class PgnManager
 {

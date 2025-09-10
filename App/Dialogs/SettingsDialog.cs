@@ -1,12 +1,12 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using Scabine.App.Prefs;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Scabine.App.Prefs;
 using static Scabine.App.Dialogs.DialogCreator;
 
 internal class SettingsDialog : BaseDialog

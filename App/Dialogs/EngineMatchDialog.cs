@@ -1,16 +1,12 @@
 ﻿namespace Scabine.App.Dialogs;
 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 using Scabine.App;
 using Scabine.App.Prefs;
-using Scabine.Scenes;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Channels;
-using System.Windows.Forms;
-using static Scabine.Core.Pieces;
 using static Scabine.App.Dialogs.DialogCreator;
+using static Scabine.Core.Pieces;
 
 internal class EngineMatchDialog : BaseDialog
 {
@@ -51,8 +47,8 @@ internal class EngineMatchDialog : BaseDialog
 		}
 		EngineMatchDefinition matchDefinition = new EngineMatchDefinition(whiteEngine, _engineGroups[White].PresetName, _engineGroups[White].ThinkingLimit, blackEngine, _engineGroups[Black].PresetName, _engineGroups[Black].ThinkingLimit);
 		if (!MatchManager.StartEngineMatch(matchDefinition))
-		{ 
-			return; 
+		{
+			return;
 		}
 		Board.Flipped = _engineGroups[White].Location.Y < _engineGroups[Black].Location.Y;
 		Close();

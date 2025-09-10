@@ -1,9 +1,9 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using Scabine.App.Prefs;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using Scabine.App.Prefs;
 
 internal static class FileChooser
 {

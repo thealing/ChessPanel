@@ -1,9 +1,9 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Scenes;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Scabine.Scenes;
 
 public class Program
 {

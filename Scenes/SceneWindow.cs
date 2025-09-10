@@ -1,7 +1,4 @@
 ﻿namespace Scabine.Scenes;
-
-using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 public sealed class SceneWindow : Form

@@ -1,12 +1,9 @@
 ﻿namespace Scabine.App.Dialogs;
 
+using System.Drawing;
+using System.Windows.Forms;
 using Scabine.App;
 using Scabine.Engines;
-using Scabine.Scenes;
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 internal class PresetDialog : BaseDialog
 {

@@ -1,11 +1,11 @@
 ﻿namespace Scabine.Core;
 
 using System;
-using static Pieces;
-using static Squares;
 using static Bitboards;
 using static Bitmasks;
 using static Magics;
+using static Pieces;
+using static Squares;
 
 public sealed class Position
 {

@@ -1,15 +1,14 @@
 ﻿namespace Scabine.App;
 
-using System.Drawing;
 using System;
-using Scabine.Scenes;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using Scabine.Core;
-using System.Drawing.Drawing2D;
-using System.Xml.Linq;
-using static Scabine.Core.Pieces;
+using Scabine.Scenes;
 using static Scabine.App.MoveClassifications;
+using static Scabine.Core.Pieces;
 
 internal class AnalyzisDisplay : Container
 {

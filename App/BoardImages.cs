@@ -1,16 +1,9 @@
 ﻿namespace Scabine.App;
 
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using Scabine.Scenes;
-using static Scabine.Core.Pieces;
-using static Scabine.App.GraphicsHelper;
-using static Resources.ResourceManager;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using Scabine.App.Prefs;
-using System.Security.Policy;
+using static Resources.ResourceManager;
+using static Scabine.App.GraphicsHelper;
 
 internal static class BoardImages
 {

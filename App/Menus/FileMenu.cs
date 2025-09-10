@@ -1,13 +1,12 @@
 ﻿namespace Scabine.App.Menus;
 
-using Scabine.App.Dialogs;
-using Scabine.App.Prefs;
-using Scabine.Scenes;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Scabine.App.Dialogs;
+using Scabine.App.Prefs;
+using Scabine.Scenes;
 
 internal static class FileMenu
 {

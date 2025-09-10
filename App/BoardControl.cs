@@ -1,16 +1,15 @@
 ﻿namespace Scabine.App;
 
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using Scabine.App.Dialogs;
 using Scabine.App.Prefs;
 using Scabine.Core;
 using Scabine.Scenes;
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
+using static Scabine.Core.Move;
 using static Scabine.Core.Pieces;
 using static Scabine.Core.Squares;
-using static Scabine.Core.Move;
 
 internal class BoardControl : SceneNode
 {

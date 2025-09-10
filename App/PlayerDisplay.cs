@@ -1,11 +1,11 @@
 ﻿namespace Scabine.App;
 
-using Scabine.App.Prefs;
-using Scabine.Scenes;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Scabine.App.Prefs;
+using Scabine.Scenes;
 using static Scabine.Core.Pieces;
 
 internal class PlayerDisplay : Container

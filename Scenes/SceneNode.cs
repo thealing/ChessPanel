@@ -3,17 +3,15 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Security.Policy;
 
 public class SceneNode
 {
 	public Size MinSize = new Size(0, 0);
 
 	public Point Location
-	{ 
-		get => _location; 
-		set => _location = value; 
+	{
+		get => _location;
+		set => _location = value;
 	}
 
 	public Size Size

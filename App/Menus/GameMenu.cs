@@ -1,11 +1,9 @@
 ﻿namespace Scabine.App.Menus;
 
-using Scabine.App.Dialogs;
-using Scabine.Scenes;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Scabine.App.Dialogs;
+using Scabine.Scenes;
 
 internal static class GameMenu
 {

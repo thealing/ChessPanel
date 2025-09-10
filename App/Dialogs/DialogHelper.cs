@@ -1,9 +1,7 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using System.Drawing;
-using System.Runtime.InteropServices;
 using System;
-using System.Threading;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Scabine.Scenes;
 

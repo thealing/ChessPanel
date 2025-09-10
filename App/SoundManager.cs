@@ -1,10 +1,10 @@
 ﻿namespace Scabine.App;
 
-using Scabine.App.Prefs;
 using System.Collections.Concurrent;
 using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
+using Scabine.App.Prefs;
 
 internal static class SoundManager
 {

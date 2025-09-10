@@ -1,16 +1,12 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using Scabine.App;
-using Scabine.App.Prefs;
-using Scabine.Engines;
-using Scabine.Scenes;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Scabine.App;
+using Scabine.App.Prefs;
 using static Scabine.App.Dialogs.DialogCreator;
 
 internal class StartEngineDialog : BaseDialog

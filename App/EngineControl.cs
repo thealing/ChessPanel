@@ -1,9 +1,5 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Core;
-using Scabine.Engines;
-using Scabine.App.Prefs;
-using Scabine.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,10 +7,13 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static Scabine.Core.Pieces;
-using static Scabine.Core.Game;
 using Scabine.App.Dialogs;
+using Scabine.App.Prefs;
+using Scabine.Core;
+using Scabine.Engines;
+using Scabine.Scenes;
+using static Scabine.Core.Game;
+using static Scabine.Core.Pieces;
 
 internal class EngineControl : Container
 {

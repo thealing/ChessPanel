@@ -1,17 +1,15 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using Scabine.Engines;
-using Scabine.Scenes;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
-using static Scabine.Core.Pieces;
-using static Scabine.App.Dialogs.DialogCreator;
-using System.Collections.Generic;
-using Scabine.Core;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
+using System.Windows.Forms;
+using Scabine.Core;
+using Scabine.Engines;
+using static Scabine.App.Dialogs.DialogCreator;
+using static Scabine.Core.Pieces;
 
 internal class AnalyzingDialog : BaseDialog
 {

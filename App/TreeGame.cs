@@ -1,15 +1,13 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Core;
-using Scabine.Engines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text.Json.Serialization;
 using System.Text.Json;
-using static Scabine.Core.Pieces;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using Scabine.Core;
+using static Scabine.Core.Pieces;
 
 internal class TreeGame : UciGame
 {

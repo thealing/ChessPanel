@@ -10,7 +10,7 @@ internal class PersistentSplitContainer : SplitContainer
 	{
 	}
 
-	public PersistentSplitContainer(string tag, Direction direction, double split) 
+	public PersistentSplitContainer(string tag, Direction direction, double split)
 		: base(direction, split)
 	{
 		SaveManager.Save += () => SaveManager.Sync(tag, ref _split);

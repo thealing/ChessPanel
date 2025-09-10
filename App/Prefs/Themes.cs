@@ -1,8 +1,8 @@
 ﻿namespace Scabine.App.Prefs;
 
-using Scabine.Resources;
 using System;
 using System.Linq;
+using Scabine.Resources;
 
 internal static class Themes
 {

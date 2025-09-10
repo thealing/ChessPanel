@@ -1,8 +1,8 @@
 ﻿namespace Scabine.App;
 
-using Scabine.Core;
 using System;
 using System.Collections.Generic;
+using Scabine.Core;
 
 internal class UciGame : Game
 {

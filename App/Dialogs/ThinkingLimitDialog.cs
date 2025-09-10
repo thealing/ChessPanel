@@ -1,9 +1,9 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using Scabine.App;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Scabine.App;
 using static Scabine.App.Dialogs.DialogCreator;
 
 internal class ThinkingLimitDialog : BaseDialog

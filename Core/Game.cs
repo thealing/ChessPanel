@@ -2,11 +2,11 @@
 
 using System;
 using System.Text;
-using static Pieces;
-using static Squares;
 using static Bitboards;
 using static Move;
+using static Pieces;
 using static Position;
+using static Squares;
 
 public class Game
 {

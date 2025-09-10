@@ -1,6 +1,5 @@
 ﻿namespace Scabine.App.Prefs;
 
-using Scabine.Core;
 using System;
 
 internal static class Play

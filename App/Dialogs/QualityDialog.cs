@@ -1,10 +1,9 @@
 ﻿namespace Scabine.App.Dialogs;
 
-using Scabine.App.Prefs;
 using System;
 using System.Drawing;
-using System.Security.Policy;
 using System.Windows.Forms;
+using Scabine.App.Prefs;
 using static Scabine.App.Dialogs.DialogCreator;
 
 internal class QualityDialog : BaseDialog

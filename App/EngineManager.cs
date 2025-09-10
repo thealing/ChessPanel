@@ -1,15 +1,15 @@
 ﻿namespace Scabine.App;
 
-using Scabine.App.Dialogs;
-using Scabine.App.Prefs;
-using Scabine.Engines;
-using Scabine.Scenes;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using Scabine.App.Dialogs;
+using Scabine.App.Prefs;
+using Scabine.Engines;
+using Scabine.Scenes;
 
 internal static class EngineManager
 {
@@ -139,9 +139,9 @@ internal static class EngineManager
 		EngineOptions preset = engineInfo.Presets[presetName];
 		EngineConfig config = new EngineConfig() { Info = engineInfo, Options = preset };
 		_runningEngines[config] = new EngineInstance()
-		{ 
-			Engine = engine, 
-			Control = engineContainer.AddEngine(engine, presetName) 
+		{
+			Engine = engine,
+			Control = engineContainer.AddEngine(engine, presetName)
 		};
 		return true;
 	}
@@ -176,7 +176,7 @@ internal static class EngineManager
 
 	public static void StopEngine(IEngine engine)
 	{
-		foreach (KeyValuePair< EngineConfig, EngineInstance> pair in _runningEngines)
+		foreach (KeyValuePair<EngineConfig, EngineInstance> pair in _runningEngines)
 		{
 			if (pair.Value.Engine == engine)
 			{
