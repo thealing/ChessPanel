@@ -2,64 +2,64 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="App\Dialogs\AnalyzingDialog.cs">
+    <Compile Update="Application\Dialogs\AnalyzingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\BaseDialog.cs">
+    <Compile Update="Application\Dialogs\BaseDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\BigCheckBox.cs">
+    <Compile Update="Application\Dialogs\BigCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\EngineGroup.cs">
+    <Compile Update="Application\Dialogs\EngineGroup.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\EngineMatchDialog.cs">
+    <Compile Update="Application\Dialogs\EngineMatchDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\EnginesDialog.cs">
+    <Compile Update="Application\Dialogs\EnginesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\FenDialog.cs">
+    <Compile Update="Application\Dialogs\FenDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\EditTextDialog.cs">
+    <Compile Update="Application\Dialogs\EditTextDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\AnalyzisDialog.cs">
+    <Compile Update="Application\Dialogs\AnalyzisDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\PgnDialog.cs">
+    <Compile Update="Application\Dialogs\PgnDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\PgnHeaderDialog.cs">
+    <Compile Update="Application\Dialogs\PgnHeaderDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\PresetDialog.cs">
+    <Compile Update="Application\Dialogs\PresetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\PromotionDialog.cs">
+    <Compile Update="Application\Dialogs\PromotionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\QualityDialog.cs">
+    <Compile Update="Application\Dialogs\QualityDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\PlayEngineDialog.cs">
+    <Compile Update="Application\Dialogs\PlayEngineDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\PositionSetupDialog.cs">
+    <Compile Update="Application\Dialogs\PositionSetupDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\SettingsDialog.cs">
+    <Compile Update="Application\Dialogs\SettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\StartEngineDialog.cs">
+    <Compile Update="Application\Dialogs\StartEngineDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\ThinkingLimitDialog.cs">
+    <Compile Update="Application\Dialogs\ThinkingLimitDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="App\Dialogs\ViewTextDialog.cs">
+    <Compile Update="Application\Dialogs\ViewTextDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Scenes\SceneWindow.cs">
