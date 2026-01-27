@@ -26,7 +26,7 @@ internal class PositionSetupDialog : BaseDialog
 		_boardPicture.MouseDown += OnMouseDown;
 		_boardPicture.MouseUp += OnMouseUp;
 		_squareSize = Math.Min(_boardPicture.Width, _boardPicture.Height) / 8;
-		GroupBox colorGroup = AddGroupBox(Controls, "Color To Move", 450, 20, 120, 100);
+		GroupBox colorGroup = AddGroupBox(Controls, "Side To Move", 450, 20, 120, 100);
 		_whiteToMove = AddRadioButton(colorGroup.Controls, "White", 20, 30, 60, 20, Update);
 		_blackToMove = AddRadioButton(colorGroup.Controls, "Black", 20, 60, 60, 20, Update);
 		GroupBox castlingGroup = AddGroupBox(Controls, "Castling Permissions", 590, 20, 290, 100);
