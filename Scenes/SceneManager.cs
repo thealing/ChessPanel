@@ -15,7 +15,6 @@ public static class SceneManager
 
 	public static void Run(Scene? scene)
 	{
-		Application.EnableVisualStyles();
 		_window.KeyDown += (sender, e) => InputManager.OnKeyDown(e);
 		_window.KeyUp += (sender, e) => InputManager.OnKeyUp(e);
 		_window.MouseDown += (sender, e) => InputManager.OnMouseDown(e);
