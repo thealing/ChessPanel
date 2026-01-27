@@ -7,7 +7,8 @@ using System.Windows.Forms;
 
 public static class SceneManager
 {
-	private static readonly Size WindowSize = new Size(1280, 720);
+	public static Form Window => _window;
+
 	private static readonly double UpdateDelta = 1.0 / 240.0;
 	private static readonly double RenderDelta = 1.0 / 60.0;
 	private static readonly double MeasureDelta = 1.0 / 2.0;
@@ -26,9 +27,8 @@ public static class SceneManager
 		_window.Paint += (sender, e) => OnPaint(e);
 		_window.Resize += (sender, e) => OnResize();
 		_window.Disposed += (sender, e) => OnClose();
-		_window.ClientSize = WindowSize;
-		_window.Show();
 		ChangeScene(scene);
+		_window.Show();
 		Loop();
 		ChangeScene(null);
 	}

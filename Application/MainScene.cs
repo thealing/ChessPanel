@@ -18,6 +18,9 @@ internal class MainScene : Scene
 		_engineContainer = new EngineContainer();
 		_playerDisplay = new PlayerDisplay();
 		_analyzisDisplay = new AnalyzisDisplay();
+		_windowSettings = new WindowSettings();
+		_windowSettings.Size = new Size(1280, 720);
+		SaveManager.Sync(nameof(_windowSettings), ref _windowSettings);
 		CreateMenu();
 	}
 
@@ -37,6 +40,8 @@ internal class MainScene : Scene
 
 	protected internal override void Enter()
 	{
+		SceneManager.Window.ClientSize = _windowSettings.Size;
+		SceneManager.Window.WindowState = _windowSettings.Maximized ? FormWindowState.Maximized : FormWindowState.Normal;
 		AddChild(_boardContainer);
 		_rightContainer.FirstChild = new FlowLayout(Direction.Vertical);
 		_rightContainer.SecondChild = new FlowLayout(Direction.Vertical);
@@ -52,6 +57,8 @@ internal class MainScene : Scene
 
 	protected internal override void Leave()
 	{
+		_windowSettings.Maximized = SceneManager.Window.WindowState == FormWindowState.Maximized;
+		SaveManager.Sync(nameof(_windowSettings), ref _windowSettings);
 		PgnManager.SaveBackup();
 		SaveManager.ForceUpdate();
 		base.Leave();
@@ -67,6 +74,10 @@ internal class MainScene : Scene
 		if (!General.EnableIdleMode)
 		{
 			InvalidationManager.ForceInvalidate();
+		}
+		if (SceneManager.Window.WindowState == FormWindowState.Normal)
+		{
+			_windowSettings.Size = SceneManager.Window.ClientSize;
 		}
 		base.Update();
 	}
@@ -98,4 +109,5 @@ internal class MainScene : Scene
 	private readonly EngineContainer _engineContainer;
 	private readonly PlayerDisplay _playerDisplay;
 	private readonly AnalyzisDisplay _analyzisDisplay;
+	private WindowSettings _windowSettings;
 }
