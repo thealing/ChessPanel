@@ -258,6 +258,7 @@ public static class SceneManager
 
 	private static void OnResize()
 	{
+		InvalidationManager.ForceInvalidate();
 		_context = BufferedGraphicsManager.Current;
 		_graphics = _context.Allocate(_window.CreateGraphics(), _window.ClientRectangle);
 		UpdateSize();
