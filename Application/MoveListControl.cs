@@ -42,7 +42,6 @@ internal class MoveListControl : ScrollableContainer
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_menuNode));
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_menuAction));
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_currentRectangle));
-		InvalidationManager.RegisterInvalidatingField(this, nameof(_previousRectangle));
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_buttons));
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_autoPlay));
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_autoPlayTime));
@@ -107,11 +106,12 @@ internal class MoveListControl : ScrollableContainer
 		_moveWidth = (bounds.Width - _numberWidth) / 2;
 		_numberWidth = bounds.Width - _moveWidth * 2;
 		_padding = _rowHeight / 4;
-		if (_currentRectangle != _previousRectangle && GameManager.GetGame().GetCurrentNode() != _hoveredNode)
+		TreeNode? currentNode = GameManager.GetGame().GetCurrentNode();
+		if (currentNode != _previousNode && currentNode != _hoveredNode)
 		{
 			ScrollHeight = Math.Max(Math.Min(_currentRectangle.Top - Size.Height / 2, VirtualHeight - Size.Height), 0);
 		}
-		_previousRectangle = _currentRectangle;
+		_previousNode = currentNode;
 	}
 
 	private void PopupMenu(TreeNode node)
@@ -458,10 +458,10 @@ internal class MoveListControl : ScrollableContainer
 	private int _rowHeight;
 	private int _padding;
 	private TreeNode? _hoveredNode;
+	private TreeNode? _previousNode;
 	private TreeNode? _menuNode;
-	private Action? _menuAction;
 	private Rectangle _currentRectangle;
-	private Rectangle _previousRectangle;
+	private Action? _menuAction;
 	private SceneButton[]? _buttons;
 	private bool _autoPlay;
 	private double _autoPlayTime;
