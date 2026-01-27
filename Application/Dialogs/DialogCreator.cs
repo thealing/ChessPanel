@@ -69,7 +69,8 @@ internal static partial class DialogCreator
 		CheckBox button = new NonSelectableCheckBox()
 		{
 			Text = text,
-			Bounds = new Rectangle(x, y, width, height)
+			Bounds = new Rectangle(x, y, width, height),
+			UseCompatibleTextRendering = true
 		};
 		if (click != null)
 		{
@@ -158,7 +159,8 @@ internal static partial class DialogCreator
 			Bounds = new Rectangle(x, y, width, height),
 			CheckAlign = ContentAlignment.MiddleLeft,
 			TextAlign = appearance == Appearance.Button ? ContentAlignment.MiddleCenter : ContentAlignment.MiddleLeft,
-			Appearance = appearance
+			Appearance = appearance,
+			UseCompatibleTextRendering = true
 		};
 		if (click != null)
 		{
