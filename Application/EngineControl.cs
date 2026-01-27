@@ -25,8 +25,8 @@ internal class EngineControl : Container
 		_moveList = new MoveList(this);
 		_font = new Font("Segoe UI", 10);
 		_backgroundBrush = new SolidBrush(Color.FromArgb(250, 250, 250));
-		_foregroundBrush = new SolidBrush(Color.Black);
 		_hoveredBrush = new SolidBrush(Color.LightGray);
+		_foregroundColor = Color.Black;
 		_columnPositions = new int[Columns.Length];
 		_columnWidths = new int[Columns.Length];
 		_columnValues = new string[MaxDepth + 1][];
@@ -299,20 +299,20 @@ internal class EngineControl : Container
 		using (new ClipChanger(g, SelfBounds))
 		{
 			string engineName = _engine.GetName();
-			int engineNameWidth = (int)g.MeasureString(engineName, _font).Width + 12;
-			int presetNameWidth = (int)g.MeasureString(_presetName, _font).Width + 12;
+			int engineNameWidth = TextRenderer.MeasureText(engineName, _font).Width + 12;
+			int presetNameWidth = TextRenderer.MeasureText(_presetName, _font).Width + 12;
 			engineNameWidth = Math.Max(engineNameWidth, Size.Width - _rowHeight - presetNameWidth);
 			engineNameWidth = Math.Min(engineNameWidth, Size.Width - _rowHeight - Size.Width / 3);
 			Rectangle engineNameRectangle = new Rectangle(0, 0, engineNameWidth, _rowHeight);
 			g.DrawRectangle(_borderPen, engineNameRectangle);
 			engineNameRectangle.Inflate(-5, 0);
-			g.DrawString(engineName, _font, _foregroundBrush, engineNameRectangle, StringFormats.CenteredClipped);
+			GraphicsHelper.DrawString(g, engineName, _font, engineNameRectangle, _foregroundColor, TextFormats.CenteredClipped);
 			Rectangle presetNameRectangle = new Rectangle(engineNameWidth, 0, Size.Width - engineNameWidth - _rowHeight, _rowHeight);
 			g.DrawRectangle(_borderPen, presetNameRectangle);
 			presetNameRectangle.Inflate(-5, 0);
 			Rectangle indicatorRectangle = new Rectangle(Size.Width - _rowHeight, 0, _rowHeight, _rowHeight);
 			g.DrawRectangle(_borderPen, indicatorRectangle);
-			g.DrawString(_presetName, _font, _foregroundBrush, presetNameRectangle, StringFormats.CenteredClipped);
+			GraphicsHelper.DrawString(g, _presetName, _font, presetNameRectangle, _foregroundColor, TextFormats.CenteredClipped);
 			if (MatchManager.IsEnginePlaying(_engine))
 			{
 				using (new SmoothingModeChanger(g, SmoothingMode.HighQuality))
@@ -333,17 +333,17 @@ internal class EngineControl : Container
 			}
 			else
 			{
-				g.DrawString("A", _font, _foregroundBrush, indicatorRectangle, StringFormats.Centered);
+				GraphicsHelper.DrawString(g, "A", _font, indicatorRectangle, _foregroundColor, TextFormats.Centered);
 			}
 			for (int column = 0; column < Columns.Length; column++)
 			{
 				Rectangle subHeaderRectangle = new Rectangle(_columnPositions[column], _rowHeight, _columnWidths[column], _rowHeight);
 				g.DrawRectangle(_borderPen, subHeaderRectangle);
-				g.DrawString(Columns[column], _font, _foregroundBrush, subHeaderRectangle, StringFormats.Centered);
+				GraphicsHelper.DrawString(g, Columns[column], _font, subHeaderRectangle, _foregroundColor, TextFormats.Centered);
 			}
 			Rectangle pvRectangle = new Rectangle(_columnsTotalWidth, _rowHeight, Size.Width - _columnsTotalWidth, _rowHeight);
 			g.DrawRectangle(_borderPen, pvRectangle);
-			g.DrawString("Best line", _font, _foregroundBrush, pvRectangle, StringFormats.Centered);
+			GraphicsHelper.DrawString(g, "Best line", _font, pvRectangle, _foregroundColor, TextFormats.Centered);
 		}
 	}
 
@@ -379,7 +379,7 @@ internal class EngineControl : Container
 				g.DrawRectangle(_borderPen, columnRectangle);
 				string value = GetColumnValue(column, depth);
 				columnRectangle.Width -= _padding;
-				g.DrawString(value, _font, _foregroundBrush, columnRectangle, StringFormats.RightAligned);
+				GraphicsHelper.DrawString(g, value, _font, columnRectangle, _foregroundColor, TextFormats.RightAligned);
 			}
 			Rectangle pvColumnRectangle = new Rectangle(_columnsTotalWidth, height, bounds.Width - _columnsTotalWidth, _rowHeight);
 			g.DrawRectangle(_borderPen, pvColumnRectangle);
@@ -404,7 +404,7 @@ internal class EngineControl : Container
 			}
 			pvColumnRectangle.X += _padding;
 			pvColumnRectangle.Width -= _padding;
-			g.DrawString(pv.ToString(), _font, _foregroundBrush, pvColumnRectangle, StringFormats.LeftClipped);
+			GraphicsHelper.DrawString(g, pv.ToString(), _font, pvColumnRectangle, _foregroundColor, TextFormats.LeftClipped);
 		}
 	}
 
@@ -482,8 +482,8 @@ internal class EngineControl : Container
 
 	private readonly MoveList _moveList;
 	private readonly Font _font;
+	private readonly Color _foregroundColor;
 	private readonly Brush _backgroundBrush;
-	private readonly Brush _foregroundBrush;
 	private readonly Brush _hoveredBrush;
 	private readonly int[] _columnPositions;
 	private readonly int[] _columnWidths;

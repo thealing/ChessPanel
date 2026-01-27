@@ -1,53 +1,43 @@
 ﻿namespace ChessPanel.Scenes;
 
 using System.Drawing;
+using System.Windows.Forms;
 
 public static class AlignmentConverter
 {
-	public static StringFormat ConvertContentAlignmentToStringFormat(ContentAlignment alignment)
+	public static TextFormatFlags ConvertContentAlignmentToTextFormatFlags(ContentAlignment alignment)
 	{
-		StringFormat format = new StringFormat();
+		TextFormatFlags flags = TextFormatFlags.NoPadding | TextFormatFlags.NoClipping;
 		switch (alignment)
 		{
 			case ContentAlignment.TopLeft:
-				format.Alignment = StringAlignment.Near;
-				format.LineAlignment = StringAlignment.Near;
+				flags |= TextFormatFlags.Left | TextFormatFlags.Top;
 				break;
 			case ContentAlignment.TopCenter:
-				format.Alignment = StringAlignment.Center;
-				format.LineAlignment = StringAlignment.Near;
+				flags |= TextFormatFlags.HorizontalCenter | TextFormatFlags.Top;
 				break;
 			case ContentAlignment.TopRight:
-				format.Alignment = StringAlignment.Far;
-				format.LineAlignment = StringAlignment.Near;
+				flags |= TextFormatFlags.Right | TextFormatFlags.Top;
 				break;
 			case ContentAlignment.MiddleLeft:
-				format.Alignment = StringAlignment.Near;
-				format.LineAlignment = StringAlignment.Center;
+				flags |= TextFormatFlags.Left | TextFormatFlags.VerticalCenter;
 				break;
 			case ContentAlignment.MiddleCenter:
-				format.Alignment = StringAlignment.Center;
-				format.LineAlignment = StringAlignment.Center;
+				flags |= TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter;
 				break;
 			case ContentAlignment.MiddleRight:
-				format.Alignment = StringAlignment.Far;
-				format.LineAlignment = StringAlignment.Center;
+				flags |= TextFormatFlags.Right | TextFormatFlags.VerticalCenter;
 				break;
 			case ContentAlignment.BottomLeft:
-				format.Alignment = StringAlignment.Near;
-				format.LineAlignment = StringAlignment.Far;
+				flags |= TextFormatFlags.Left | TextFormatFlags.Bottom;
 				break;
 			case ContentAlignment.BottomCenter:
-				format.Alignment = StringAlignment.Center;
-				format.LineAlignment = StringAlignment.Far;
+				flags |= TextFormatFlags.HorizontalCenter | TextFormatFlags.Bottom;
 				break;
 			case ContentAlignment.BottomRight:
-				format.Alignment = StringAlignment.Far;
-				format.LineAlignment = StringAlignment.Far;
+				flags |= TextFormatFlags.Right | TextFormatFlags.Bottom;
 				break;
 		}
-		format.Trimming = StringTrimming.None;
-		format.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.NoClip;
-		return format;
+		return flags;
 	}
 }

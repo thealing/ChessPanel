@@ -16,9 +16,9 @@ internal class PlayerDisplay : Container
 		_nameFont = new Font("Tahoma", 12);
 		_clockFont = new Font("MS Reference Sans Serif", 20);
 		_backgroundBrush = new SolidBrush(Color.FromArgb(250, 250, 250));
-		_foregroundBrush = new SolidBrush(Color.Black);
 		_activeBrush = new SolidBrush(Color.LightGreen);
 		_flaggedBrush = new SolidBrush(Color.IndianRed);
+		_foregroundColor = Color.Black;
 		_fontHeight = _clockFont.Height;
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_whiteSeconds));
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_whiteTenths));
@@ -34,8 +34,8 @@ internal class PlayerDisplay : Container
 		int height = Size.Height / 2;
 		int whiteHeight = Board.Flipped ? 0 : height;
 		int blackHeight = Board.Flipped ? height : 0;
-		g.DrawString(PgnManager.GetValue("White"), _nameFont, _foregroundBrush, new Rectangle(padding, whiteHeight, width - padding * 2, height), StringFormats.LeftClipped);
-		g.DrawString(PgnManager.GetValue("Black"), _nameFont, _foregroundBrush, new Rectangle(padding, blackHeight, width - padding * 2, height), StringFormats.LeftClipped);
+		GraphicsHelper.DrawText(g, PgnManager.GetValue("White"), _nameFont, new Rectangle(padding, whiteHeight, width - padding * 2, height), _foregroundColor, TextFormats.LeftClipped);
+		GraphicsHelper.DrawText(g, PgnManager.GetValue("Black"), _nameFont, new Rectangle(padding, blackHeight, width - padding * 2, height), _foregroundColor, TextFormats.LeftClipped);
 		Rectangle whiteRectangle = new Rectangle(width, whiteHeight, Size.Width - width, height);
 		Rectangle blackRectangle = new Rectangle(width, blackHeight, Size.Width - width, height);
 		whiteRectangle.Inflate(-padding, -padding);
@@ -110,8 +110,8 @@ internal class PlayerDisplay : Container
 		string blackText = $"{_blackSeconds / 60,2}:{_blackSeconds % 60:D2}.{_blackTenths}";
 		whiteRectangle.Inflate(-padding, -padding);
 		blackRectangle.Inflate(-padding, -padding);
-		g.DrawString(whiteText, _clockFont, _foregroundBrush, whiteRectangle, StringFormats.Centered);
-		g.DrawString(blackText, _clockFont, _foregroundBrush, blackRectangle, StringFormats.Centered);
+		GraphicsHelper.DrawText(g, whiteText, _clockFont, whiteRectangle, _foregroundColor, TextFormats.Centered);
+		GraphicsHelper.DrawText(g, blackText, _clockFont, blackRectangle, _foregroundColor, TextFormats.Centered);
 		base.Render(g);
 	}
 
@@ -134,9 +134,9 @@ internal class PlayerDisplay : Container
 	private readonly Font _nameFont;
 	private readonly Font _clockFont;
 	private readonly Brush _backgroundBrush;
-	private readonly Brush _foregroundBrush;
 	private readonly Brush _activeBrush;
 	private readonly Brush _flaggedBrush;
+	private readonly Color _foregroundColor;
 	private readonly int _fontHeight;
 	private int _whiteSeconds;
 	private int _blackSeconds;

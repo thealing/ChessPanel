@@ -131,7 +131,7 @@ internal class BoardControl : SceneNode
 		RenderSquares(g);
 		RenderPieces(g);
 		RenderBorder(g);
-		RenderCoordinates(g);
+		RenderCoordinates(g, true);
 		base.Render(g);
 		_renderLastMove = renderLastMove;
 		_selectedSquare = selectedSquare;
@@ -396,7 +396,7 @@ internal class BoardControl : SceneNode
 		g.DrawRectangle(_borderPen, SelfBounds);
 	}
 
-	private void RenderCoordinates(Graphics g)
+	private void RenderCoordinates(Graphics g, bool drawCompatibleText = false)
 	{
 		if (!Board.ShowCoordinates)
 		{
@@ -409,7 +409,14 @@ internal class BoardControl : SceneNode
 			int y = _squareSize / 2 + _squareSize * (Board.Flipped ? 7 - rank : rank);
 			for (int i = 0; i < 2; i++)
 			{
-				g.DrawString(GetRankChar(rank).ToString(), font, Brushes.Black, new Point(x, y), StringFormats.Centered);
+				if (drawCompatibleText)
+				{
+					g.DrawString(GetRankChar(rank).ToString(), font, Brushes.Black, new Point(x, y), StringFormats.Centered);
+				}
+				else
+				{
+					GraphicsHelper.DrawText(g, GetRankChar(rank).ToString(), font, new Rectangle(x, y, 0, 0), Color.Black, TextFormats.Centered);
+				}
 				x = _boardSize - x;
 			}
 		}
@@ -419,7 +426,14 @@ internal class BoardControl : SceneNode
 			int y = _boardSize + _gapSize / 2;
 			for (int i = 0; i < 2; i++)
 			{
-				g.DrawString(GetFileChar(file).ToString(), font, Brushes.Black, new Point(x, y), StringFormats.Centered);
+				if (drawCompatibleText)
+				{
+					g.DrawString(GetFileChar(file).ToString(), font, Brushes.Black, new Point(x, y), StringFormats.Centered);
+				}
+				else
+				{
+					GraphicsHelper.DrawText(g, GetFileChar(file).ToString(), font, new Rectangle(x, y, 0, 0), Color.Black, TextFormats.Centered);
+				}
 				y = _boardSize - y;
 			}
 		}

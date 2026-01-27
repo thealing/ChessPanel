@@ -194,8 +194,15 @@ public static class SceneManager
 		{
 			Font font = new Font("Segoe UI", 15, FontStyle.Bold);
 			Brush brush = new SolidBrush(Color.FromArgb(170, Color.Green));
-			g.DrawString(GetUpdateFps().ToString(), font, brush, new Point(50, _window.ClientSize.Height - 20), StringFormats.RightAligned);
-			g.DrawString(GetRenderFps().ToString(), font, brush, new Point(100, _window.ClientSize.Height - 20), StringFormats.RightAligned);
+			StringFormat format = new StringFormat()
+			{
+				Alignment = StringAlignment.Far,
+				LineAlignment = StringAlignment.Center,
+				Trimming = StringTrimming.None,
+				FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.NoClip
+			};
+			g.DrawString(GetUpdateFps().ToString(), font, brush, new Point(50, _window.ClientSize.Height - 20), format);
+			g.DrawString(GetRenderFps().ToString(), font, brush, new Point(100, _window.ClientSize.Height - 20), format);
 		}
 	}
 

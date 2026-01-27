@@ -3,7 +3,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using static AlignmentConverter;
+using ChessPanel.Application;
 
 public class SceneToolStripRenderer : ToolStripProfessionalRenderer
 {
@@ -61,13 +61,11 @@ public class SceneToolStripRenderer : ToolStripProfessionalRenderer
 	protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
 	{
 		Rectangle rectangle = e.TextRectangle;
-		StringFormat alignment = ConvertContentAlignmentToStringFormat(e.Item.TextAlign);
 		if ((e.TextFormat & TextFormatFlags.Right) != 0)
 		{
 			rectangle = e.Item.ContentRectangle;
 			rectangle.Offset(-4, 0);
-			alignment = StringFormats.RightAligned;
 		}
-		e.Graphics.DrawString(e.Text, e.TextFont, e.Item.Enabled ? Brushes.Black : Brushes.Gray, rectangle, alignment);
+		GraphicsHelper.DrawText(e.Graphics, e.Text, e.TextFont, rectangle, e.Item.Enabled ? Color.Black : Color.Gray, e.TextFormat);
 	}
 }
