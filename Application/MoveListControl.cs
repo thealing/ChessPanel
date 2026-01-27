@@ -23,16 +23,16 @@ internal class MoveListControl : ScrollableContainer
 		_linePen = new Pen(Color.DimGray);
 		_backBrush = new SolidBrush(Color.FromArgb(250, 250, 250));
 		_backgroundBrush = new SolidBrush(Color.FromArgb(230, 230, 230));
-		_foregroundBrush = new SolidBrush(Color.Black);
 		_currentMoveBrush = new SolidBrush(Color.LightCyan);
 		_hoveredMoveBrush = new SolidBrush(Color.LightBlue);
-		_moveClassBrushes = new Brush[MoveClassCount];
-		_moveClassBrushes[Best] = new SolidBrush(MixColors(0.8, Color.Green, Color.Black));
-		_moveClassBrushes[Great] = new SolidBrush(MixColors(0.8, Color.GreenYellow, Color.Black));
-		_moveClassBrushes[Good] = new SolidBrush(MixColors(0.8, Color.Gray, Color.Black));
-		_moveClassBrushes[Inaccuracy] = new SolidBrush(MixColors(0.8, Color.Yellow, Color.Black));
-		_moveClassBrushes[Mistake] = new SolidBrush(MixColors(0.8, Color.Orange, Color.Black));
-		_moveClassBrushes[Blunder] = new SolidBrush(MixColors(0.8, Color.Red, Color.Black));
+		_foregroundColor = Color.Black;
+		_moveClassColors = new Color[MoveClassCount];
+		_moveClassColors[Best] = MixColors(0.8, Color.Green, Color.Black);
+		_moveClassColors[Great] = MixColors(0.8, Color.GreenYellow, Color.Black);
+		_moveClassColors[Good] = MixColors(0.8, Color.Gray, Color.Black);
+		_moveClassColors[Inaccuracy] = MixColors(0.8, Color.Yellow, Color.Black);
+		_moveClassColors[Mistake] = MixColors(0.8, Color.Orange, Color.Black);
+		_moveClassColors[Blunder] = MixColors(0.8, Color.Red, Color.Black);
 		_rowHeight = _font.Height * 3 / 2;
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_moveWidth));
 		InvalidationManager.RegisterInvalidatingField(this, nameof(_numberWidth));
@@ -76,7 +76,10 @@ internal class MoveListControl : ScrollableContainer
 	public override void Render(Graphics g)
 	{
 		RenderBackground(g);
-		RenderTree(g);
+		using (new GdiClipChanger(g, GetRenderBounds()))
+		{
+			RenderTree(g);
+		}
 		base.Render(g);
 	}
 
@@ -312,11 +315,11 @@ internal class MoveListControl : ScrollableContainer
 			int x = 0, y = 0;
 			Rectangle GetNextTextRect(string text)
 			{
-				Size size = Size.Round(g.MeasureString(text, _branchFont));
-				if (!string.IsNullOrWhiteSpace(text) && x != 0 && x + size.Width > rectangle.Width)
+				Size size = Size.Ceiling(g.MeasureString(text, _branchFont));
+				if (!string.IsNullOrWhiteSpace(text) && x != 0 && x + size.Width > rectangle.Width - padding)
 				{
 					x = 0;
-					y += size.Height;
+					y += size.Height + padding;
 				}
 				Point point = new Point(rectangle.X + x, rectangle.Y + y);
 				x += size.Width;
@@ -326,19 +329,19 @@ internal class MoveListControl : ScrollableContainer
 			{
 				Rectangle rectangle = GetNextTextRect(text);
 				RenderNode(g, node, rectangle);
-				DrawString(g, text, _branchFont, _foregroundBrush, rectangle, StringFormats.LeftAligned);
+				DrawString(g, text, _branchFont, _foregroundColor, rectangle, TextFormats.LeftAligned);
 			}
 			DrawMove(node, $"{node.Rank / 2 + 1}" + (node.Color == Black ? "..." : ".") + node.San + " ");
 			while (!node.IsCollapsed && node.Children.Count == 1)
 			{
 				node = node.Children[0];
-				DrawString(g, " ", _branchFont, _foregroundBrush, GetNextTextRect(" "), StringFormats.LeftAligned);
+				DrawString(g, " ", _branchFont, _foregroundColor, GetNextTextRect(" "), TextFormats.LeftAligned);
 				DrawMove(node, node.Color == White ? $"{node.Rank / 2 + 1}." + node.San : node.San);
 			}
 			if (node.IsCollapsed && node.Children.Count != 0)
 			{
 				string ellipsisText = "[...]";
-				DrawString(g, ellipsisText, _branchFont, _foregroundBrush, GetNextTextRect(ellipsisText), StringFormats.LeftAligned);
+				DrawString(g, ellipsisText, _branchFont, _foregroundColor, GetNextTextRect(ellipsisText), TextFormats.LeftAligned);
 			}
 			actualHeight += y + height + padding * 2;
 			depthHeights[depth + 1] = actualHeight;
@@ -365,7 +368,7 @@ internal class MoveListControl : ScrollableContainer
 				Rectangle blackRectangle = new Rectangle(_numberWidth + _moveWidth, actualHeight, _moveWidth, _rowHeight);
 				actualHeight += _rowHeight;
 				FillRectangle(g, _backgroundBrush, rowRectangle);
-				DrawString(g, $"{next.Rank / 2 + 1}", _font, _foregroundBrush, numberRectangle, StringFormats.Centered);
+				DrawString(g, $"{next.Rank / 2 + 1}", _font, _foregroundColor, numberRectangle, TextFormats.Centered);
 				void DrawMove(TreeNode? node, string move, Rectangle rectangle)
 				{
 					if (node != null)
@@ -375,15 +378,15 @@ internal class MoveListControl : ScrollableContainer
 					}
 					rectangle.Inflate(-_padding, 0);
 					rectangle.Inflate(-_padding, 0);
-					Size moveSize = Size.Round(g.MeasureString(move, _font));
-					StringFormat moveFormat = moveSize.Width >= rectangle.Width ? StringFormats.Centered : StringFormats.LeftAligned;
-					if (node?.Class != null && _moveClassBrushes[node.Class.Value] is Brush brush)
+					Size moveSize = Size.Round(TextRenderer.MeasureText(move, _font));
+					TextFormatFlags moveFormat = moveSize.Width >= rectangle.Width ? TextFormats.Centered : TextFormats.LeftAligned;
+					if (node?.Class != null && _moveClassColors[node.Class.Value] is Color color)
 					{
-						DrawString(g, move, _font, brush, rectangle, moveFormat);
+						DrawString(g, move, _font, color, rectangle, moveFormat);
 					}
 					else
 					{
-						DrawString(g, move, _font, _foregroundBrush, rectangle, moveFormat);
+						DrawString(g, move, _font, _foregroundColor, rectangle, moveFormat);
 					}
 				}
 				void DrawGrid()
@@ -444,12 +447,12 @@ internal class MoveListControl : ScrollableContainer
 	private readonly Font _branchFont;
 	private readonly Pen _gridPen;
 	private readonly Pen _linePen;
+	private readonly Color _foregroundColor;
+	private readonly Color[] _moveClassColors;
 	private readonly Brush _backBrush;
 	private readonly Brush _backgroundBrush;
-	private readonly Brush _foregroundBrush;
 	private readonly Brush _currentMoveBrush;
 	private readonly Brush _hoveredMoveBrush;
-	private readonly Brush[] _moveClassBrushes;
 	private int _moveWidth;
 	private int _numberWidth;
 	private int _rowHeight;

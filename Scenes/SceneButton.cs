@@ -3,6 +3,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using Scabine.Application;
 
 public class SceneButton : Container
 {
@@ -80,16 +81,14 @@ public class SceneButton : Container
 					_previousImage = Image;
 					_cachedSize = size;
 					_cachedImage = new Bitmap(size.Width, size.Height);
-					using (Graphics cacheGraphics = Graphics.FromImage(_cachedImage))
-					{
-						cacheGraphics.DrawImage(Image, 0, 0, _cachedImage.Width, _cachedImage.Height);
-					}
+					using Graphics cacheGraphics = Graphics.FromImage(_cachedImage);
+					cacheGraphics.DrawImage(Image, 0, 0, _cachedImage.Width, _cachedImage.Height);
 				}
 				g.DrawImage(_cachedImage, (Size.Width - size.Width) / 2, (Size.Height - size.Height) / 2);
 			}
 			if (Text != null)
 			{
-				g.DrawString(Text, Font ?? SystemFonts.DefaultFont, Brushes.Black, SelfBounds, StringFormats.Centered);
+				GraphicsHelper.DrawText(g, Text, Font ?? SystemFonts.DefaultFont, SelfBounds, Color.Black, TextFormats.Centered);
 			}
 		}
 		if (Disabled)

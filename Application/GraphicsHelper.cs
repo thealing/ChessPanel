@@ -3,6 +3,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 using Scabine.Scenes;
 
 internal class GraphicsHelper
@@ -16,12 +17,30 @@ internal class GraphicsHelper
 		}
 	}
 
-	public static void DrawString(Graphics g, string text, Font font, Brush brush, Rectangle layoutRectangle, StringFormat format)
+	public static void DrawString(Graphics g, string? text, Font font, Rectangle layoutRectangle, Color color, TextFormatFlags format)
+	{
+		DrawString(g, text, font, color, layoutRectangle, format);
+	}
+
+	public static void DrawString(Graphics g, string? text, Font font, Color color, Rectangle layoutRectangle, TextFormatFlags format)
 	{
 		if (g.ClipBounds.IntersectsWith(layoutRectangle))
 		{
-			g.DrawString(text, font, brush, layoutRectangle, format);
+			layoutRectangle.Offset((int)g.Transform.OffsetX, (int)g.Transform.OffsetY);
+			TextRenderer.DrawText(g, text, font, layoutRectangle, color, format);
 		}
+	}
+
+	public static void DrawText(Graphics g, string? text, Font font, Rectangle layoutRectangle, Color color, TextFormatFlags format)
+	{
+		layoutRectangle.Offset((int)g.Transform.OffsetX, (int)g.Transform.OffsetY);
+		TextRenderer.DrawText(g, text, font, layoutRectangle, color, format);
+	}
+
+	public static void DrawText(Graphics g, string? text, Font font, Color color, Rectangle layoutRectangle, TextFormatFlags format)
+	{
+		layoutRectangle.Offset((int)g.Transform.OffsetX, (int)g.Transform.OffsetY);
+		TextRenderer.DrawText(g, text, font, layoutRectangle, color, format);
 	}
 
 	public static void FillRectangle(Graphics g, Brush brush, Rectangle rect)

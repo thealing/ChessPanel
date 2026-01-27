@@ -144,9 +144,9 @@ internal class AnalyzisDisplay : Container
 		int height = Size.Height + 20;
 		void RenderLine(string name, object value1, object value2)
 		{
-			g.DrawString(name, _font, Brushes.Black, new Rectangle(0, height, Size.Width * 2 / 6, _lineHeight), StringFormats.LeftClipped);
-			g.DrawString(value1.ToString(), _font, Brushes.Black, new Rectangle(Size.Width * 2 / 6, height, Size.Width * 2 / 6, _lineHeight), StringFormats.CenteredClipped);
-			g.DrawString(value2.ToString(), _font, Brushes.Black, new Rectangle(Size.Width * 4 / 6, height, Size.Width * 2 / 6, _lineHeight), StringFormats.CenteredClipped);
+			GraphicsHelper.DrawString(g, name, _font, new Rectangle(0, height, Size.Width * 2 / 6, _lineHeight), Color.Black, TextFormats.LeftClipped);
+			GraphicsHelper.DrawString(g, value1.ToString(), _font, new Rectangle(Size.Width * 2 / 6, height, Size.Width * 2 / 6, _lineHeight), Color.Black, TextFormats.CenteredClipped);
+			GraphicsHelper.DrawString(g, value2.ToString(), _font, new Rectangle(Size.Width * 4 / 6, height, Size.Width * 2 / 6, _lineHeight), Color.Black, TextFormats.CenteredClipped);
 			height += _lineHeight;
 		}
 		void RenderSeparator()

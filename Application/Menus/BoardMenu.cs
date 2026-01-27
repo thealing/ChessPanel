@@ -125,35 +125,33 @@ internal static class BoardMenu
 		SceneNode boardContainer = board.Parent;
 		Size boardSize = boardContainer.Size;
 		int imageSize = Math.Min(boardSize.Width, boardSize.Height);
-		using (Bitmap bitmap = new Bitmap(imageSize, imageSize))
+		using Bitmap bitmap = new Bitmap(imageSize, imageSize);
+		using (Graphics g = Graphics.FromImage(bitmap))
 		{
-			using (Graphics g = Graphics.FromImage(bitmap))
+			g.Clear(Color.White);
+			g.TranslateTransform((imageSize - boardSize.Width) / 2 + board.Location.X, (imageSize - boardSize.Height) / 2 + board.Location.Y);
+			board.RenderBoardOnly(g);
+		}
+		string? path = FileChooser.ChooseSaveFile("Export Board", "Image", "jpg", "Board");
+		if (path != null)
+		{
+			QualityDialog dialog = new QualityDialog();
+			DialogHelper.ShowDialog(dialog);
+			if (dialog.Success)
 			{
-				g.Clear(Color.White);
-				g.TranslateTransform((imageSize - boardSize.Width) / 2 + board.Location.X, (imageSize - boardSize.Height) / 2 + board.Location.Y);
-				board.RenderBoardOnly(g);
-			}
-			string? path = FileChooser.ChooseSaveFile("Export Board", "Image", "jpg", "Board");
-			if (path != null)
-			{
-				QualityDialog dialog = new QualityDialog();
-				DialogHelper.ShowDialog(dialog);
-				if (dialog.Success)
-				{
-					long quality = dialog.Quality;
-					string fen = GameManager.GetGame().GetFen();
-					byte[] fenBytes = Encoding.UTF8.GetBytes(fen);
-					PropertyItem propertyItem = (PropertyItem)FormatterServices.GetUninitializedObject(typeof(PropertyItem));
-					propertyItem.Id = 0x010E;
-					propertyItem.Type = 1;
-					propertyItem.Len = fenBytes.Length;
-					propertyItem.Value = fenBytes;
-					bitmap.SetPropertyItem(propertyItem);
-					EncoderParameters encoderParameters = new EncoderParameters(1);
-					encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
-					ImageCodecInfo jpegEncoder = ImageCodecInfo.GetImageEncoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
-					bitmap.Save(path, jpegEncoder, encoderParameters);
-				}
+				long quality = dialog.Quality;
+				string fen = GameManager.GetGame().GetFen();
+				byte[] fenBytes = Encoding.UTF8.GetBytes(fen);
+				PropertyItem propertyItem = (PropertyItem)FormatterServices.GetUninitializedObject(typeof(PropertyItem));
+				propertyItem.Id = 0x010E;
+				propertyItem.Type = 1;
+				propertyItem.Len = fenBytes.Length;
+				propertyItem.Value = fenBytes;
+				bitmap.SetPropertyItem(propertyItem);
+				EncoderParameters encoderParameters = new EncoderParameters(1);
+				encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+				ImageCodecInfo jpegEncoder = ImageCodecInfo.GetImageEncoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+				bitmap.Save(path, jpegEncoder, encoderParameters);
 			}
 		}
 	}
@@ -167,14 +165,12 @@ internal static class BoardMenu
 		string? path = FileChooser.ChooseOpenFile("Import Board", "Image", "jpg");
 		if (path != null)
 		{
-			using (Bitmap bitmap = new Bitmap(path))
+			using Bitmap bitmap = new Bitmap(path);
+			PropertyItem? propertyItem = bitmap.GetPropertyItem(0x010E);
+			if (propertyItem?.Value != null)
 			{
-				PropertyItem? propertyItem = bitmap.GetPropertyItem(0x010E);
-				if (propertyItem?.Value != null)
-				{
-					string fen = Encoding.UTF8.GetString(propertyItem.Value);
-					PgnManager.NewGame(fen);
-				}
+				string fen = Encoding.UTF8.GetString(propertyItem.Value);
+				PgnManager.NewGame(fen);
 			}
 		}
 	}
