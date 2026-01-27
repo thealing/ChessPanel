@@ -12,6 +12,8 @@ public class Program
 	{
 		try
 		{
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
 			SceneManager.Run(new MainScene());
 		}
 		catch (Exception exception)
