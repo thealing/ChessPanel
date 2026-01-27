@@ -127,8 +127,7 @@ public static class SceneManager
 	{
 		if (!IsMinimized())
 		{
-			Point position = new Point(0, _menu == null ? 0 : _menu.Bottom);
-			_scene?.Resize(new Rectangle(position, _window.ClientSize - (Size)position));
+			UpdateSize();
 		}
 		_scene?.Update();
 		_updateCount++;
@@ -251,12 +250,18 @@ public static class SceneManager
 	{
 		_context = BufferedGraphicsManager.Current;
 		_graphics = _context.Allocate(_window.CreateGraphics(), _window.ClientRectangle);
-		_scene?.Resize(new Rectangle(Point.Empty, _window.ClientSize));
+		UpdateSize();
 	}
 
 	private static void OnClose()
 	{
 		_disposed = true;
+	}
+
+	private static void UpdateSize()
+	{
+		Point position = new Point(0, _menu == null ? 0 : _menu.Bottom);
+		_scene?.Resize(new Rectangle(position, _window.ClientSize - (Size)position));
 	}
 
 	static SceneManager()
