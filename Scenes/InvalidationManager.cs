@@ -136,11 +136,14 @@ public static class InvalidationManager
 		public bool HasValueChanged()
 		{
 			object? target = _targetReference?.Target;
-			object? value = _getValue(target);
-			if (!Equals(value, _lastValue))
+			if (target != null)
 			{
-				_lastValue = value;
-				return true;
+				object? value = _getValue(target);
+				if (!Equals(value, _lastValue))
+				{
+					_lastValue = value;
+					return true;
+				}
 			}
 			return false;
 		}
